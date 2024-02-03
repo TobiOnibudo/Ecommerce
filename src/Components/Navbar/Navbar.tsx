@@ -20,6 +20,7 @@ function  Navbar(){
         <div className="nav-login-cart">
             <button>Login</button>
             <img src={cart_icon} alt="an icon of a cart" />
+            <div className="nav-cart-count">0</div>
         </div>
       </div>
     )

@@ -71,3 +71,19 @@
 .nav-login-cart button:active{
     background: #F3F3F3;
 }
+
+.nav-cart-count
+{
+    width: 1.375rem;
+    height: 1.375rem;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-top: -2.188rem;
+    margin-left: -3.438rem;
+    border-radius: 0.688rem;
+    font-size: 0.875rem;
+    background: red;
+    color: white;
+    flex-wrap: wrap;
+}
