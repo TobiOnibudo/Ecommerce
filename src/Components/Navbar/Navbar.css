@@ -87,3 +87,7 @@
     color: white;
     flex-wrap: wrap;
 }
+
+.link{
+    text-decoration: none;
+}
