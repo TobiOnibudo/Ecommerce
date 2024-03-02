@@ -1,13 +1,21 @@
+import { useShop } from "../Context/ShopContext";
+import "./CSS/ShopCategory.css"
+
+
 
 type Props = 
 {
-  category : string;
+  banner : string,
+  category : string,
 }
 
-function ShopCategory({category} : Props){
+function ShopCategory({banner,category, ...props} : Props){
+  const {all_product} = useShop()
+  
   return (
-    <div>
-      
+    <div className="shop-category">
+      <img src={banner} alt="banner display discounts and a model on the page "/>
+      <div></div>
     </div>
   )
 };
