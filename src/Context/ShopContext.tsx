@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 import all_product from "../Components/assets/all_product";
 import Product from "../Pages/Product";
 
@@ -16,6 +16,8 @@ type Product = {
 
 export const ShopContext = createContext<Array<Product>
 >([]);
+
+export const useShop = () => useContext(ShopContext);
 
 const ShopContextProvider = (props : any) => {
     const contextValue =  all_product
