@@ -3,7 +3,7 @@ import all_product from "../Components/assets/all_product";
 import Product from "../Pages/Product";
 
 
-type Product = {
+export type Product = {
     id: number,
     name: string,
     category: string,
