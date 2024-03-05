@@ -37,6 +37,9 @@ function ShopCategory({banner,category, ...props} : Props){
             }
         })}
       </div>
+      <div className="shopcategory-loadmore">
+        Explore more
+      </div>
     </div>
 
   )
