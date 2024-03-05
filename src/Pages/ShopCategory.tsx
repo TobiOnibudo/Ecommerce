@@ -15,7 +15,7 @@ function ShopCategory({banner,category, ...props} : Props){
   
   return (
     <div className="shop-category">
-      <img src={banner} alt="banner display discounts and a model on the page "/>
+      <img className="shopcategory-banner" src={banner} alt="banner display discounts and a model on the page "/>
       <div className="shopcategory-indexSort">
         <p>
           <span> Showing 1-12 </span> out of 36 products
