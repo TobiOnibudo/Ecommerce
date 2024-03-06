@@ -1,6 +1,6 @@
 import { createContext, useContext } from "react";
 import all_product from "../Components/assets/all_product";
-import Product from "../Pages/Product";
+
 
 
 export type Product = {
