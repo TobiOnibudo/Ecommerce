@@ -3,6 +3,7 @@ import { useShop,Product} from "../Context/ShopContext";
 import Breadcrumb from "../Components/Breadcrumbs/Breadcrumb";
 import ProductDisplay from "../Components/ProductDisplay/ProductDisplay";
 import DescriptionBox from "../Components/DescriptionBox/DescriptionBox";
+import RelatedProducts from "../Components/RelatedProducts/RelatedProducts";
 
 function Product(){
   const all_product = useShop();
@@ -16,6 +17,7 @@ function Product(){
       <Breadcrumb product={product} />
       <ProductDisplay product={product} />
       <DescriptionBox />
+      <RelatedProducts/>
     </div>
   )
 };
