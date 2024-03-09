@@ -15,17 +15,17 @@ export type Product = {
   type AddToCartFunction = (itemId: number) => void;
   type RemoveFromCartFunction = (itemId: number) => void;
 
-  type CartItem = {count : number}
+  type CartItem = {[key: string]: number};
   interface ContextValue {
     all_product: Product[];
-    cartItems: CartItem[];
+    cartItems: CartItem;
     addToCart : AddToCartFunction;
     removeFromCart : RemoveFromCartFunction;
   }
     
   const defaultValue: ContextValue = {
     all_product: [],
-    cartItems: [],
+    cartItems: {},
     addToCart: () => {},
     removeFromCart: () => {}
 };
