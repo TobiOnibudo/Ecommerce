@@ -14,6 +14,8 @@ export type Product = {
 
   type AddToCartFunction = (itemId: number) => void;
   type RemoveFromCartFunction = (itemId: number) => void;
+  type GetTotalCartAmountFunction = () => number;
+  type GetTotalCartItemsFunction = () => number;
 
   type CartItem = {[key: string]: number};
   interface ContextValue {
@@ -21,13 +23,17 @@ export type Product = {
     cartItems: CartItem;
     addToCart : AddToCartFunction;
     removeFromCart : RemoveFromCartFunction;
+    getTotalCartAmount : GetTotalCartAmountFunction;
+    getTotalCartItems : GetTotalCartItemsFunction;
   }
     
   const defaultValue: ContextValue = {
     all_product: [],
     cartItems: {},
     addToCart: () => {},
-    removeFromCart: () => {}
+    removeFromCart: () => {},
+    getTotalCartAmount: () => {return 0},
+    getTotalCartItems : () => {return 0},
 };
 export const ShopContext = createContext<ContextValue>(defaultValue);
 
@@ -52,7 +58,30 @@ const ShopContextProvider = (props : any) => {
         setCartItems((prev : any)=>({...prev,[itemId]:prev[itemId]-1}))
     } 
 
-    const contextValue =  {all_product,cartItems,addToCart,removeFromCart};
+    const getTotalCartAmount = () => {
+        let totalAmount = 0;
+        for (const item in cartItems){
+            if (cartItems[item] > 0)
+            {
+                let itemInfo = all_product.find((product) => product.id === Number(item))
+                let itemPrice = itemInfo?.new_price ?? 0
+                totalAmount +=   itemPrice * cartItems[item]
+            }
+        }
+        return totalAmount;
+    }
+
+    const getTotalCartItems = () => {
+        let totalItem = 0
+        for(const item in cartItems)
+        {
+            totalItem += cartItems[item] 
+        }
+
+        return totalItem
+    }
+
+    const contextValue =  {all_product,cartItems,addToCart,removeFromCart,getTotalCartAmount,getTotalCartItems};
     return (
         <ShopContext.Provider value={contextValue}>
             {props.children}
