@@ -15,11 +15,11 @@ function DescriptionBox(){
                 and customers can browse, compare, select, and purchase
                 items conveniently from the comfort of their own homes or any 
                 location with internet access. 
-                <p> 
+            </p>
+            <p> 
                 Overall, an e-commerce website serves as a digital storefront for
                 businesses to reach a broader audience, increase sales, and provide 
                 convenient shopping experiences for customers worldwide.
-                </p>
             </p>
         </div>
     </div>
