@@ -1,4 +1,4 @@
-import { Product } from '../../Context/ShopContext';
+import { Product, useShop } from '../../Context/ShopContext';
 import './ProductDisplay.css'
 import star_icon from "../assets/star_icon.png"
 import star_dull_icon from "../assets/star_dull_icon.png"
@@ -7,6 +7,8 @@ interface ProductDisplayProps {
 }
 
 function ProductDisplay({ product }: ProductDisplayProps){
+
+  const {addToCart} = useShop();
   return (
     <div className="productdisplay">
       <div className="productdisplay-left">
@@ -50,7 +52,7 @@ function ProductDisplay({ product }: ProductDisplayProps){
             <div>XL</div>
             <div>XXL</div>
           </div>
-          <button>ADD TO CART</button>
+          <button onClick={() => {product ? addToCart(product.id): null}}>ADD TO CART</button>
           <p className="productdisplay-right-category">
             <span>Category :</span> Women, T-Shirt, Crop Top
           </p>
