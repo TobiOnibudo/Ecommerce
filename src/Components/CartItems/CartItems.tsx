@@ -20,16 +20,16 @@ function CartItems(){
             {
                 return  (
                 <div>
-                <div className="cartitems-format">
+                <div className="cartitems-format cartitems-format-main">
                     <img src={product.image} alt=""  className="carticon-product"/>
                     <p>{product.name}</p>
-                    <p>{product.new_price}</p>
+                    <p>${product.new_price}</p>
                     <button className="cartitems-quantity">{cartItems[product.id]}</button>
-                    <p>{product.new_price * cartItems[product.id]} </p>
-                    <img src={remove_icon} onClick={() => {removeFromCart(product.id)}}
+                    <p>${product.new_price * cartItems[product.id]} </p>
+                    <img className="cartitems-remove-icon" src={remove_icon} onClick={() => {removeFromCart(product.id)}}
                     alt="icon that is meant to remove an item from the cart" />
-    
                 </div>
+                <hr/>
             </div>
             )
             }
