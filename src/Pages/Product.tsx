@@ -6,9 +6,9 @@ import DescriptionBox from "../Components/DescriptionBox/DescriptionBox";
 import RelatedProducts from "../Components/RelatedProducts/RelatedProducts";
 
 function Product(){
-  const all_product = useShop();
+  const {all_product} = useShop() ;
   const {productId} = useParams();
-  const product = all_product.find((e : Product|undefined)=>{
+  const product = all_product?.find((e : Product|undefined)=>{
     return  e?.id === Number(productId);
   })
 
