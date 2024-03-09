@@ -11,7 +11,7 @@ type Props =
 
 
 function ShopCategory({banner,category, ...props} : Props){
-  const all_product = useShop();
+  const {all_product} = useShop();
   
   return (
     <div className="shop-category">
