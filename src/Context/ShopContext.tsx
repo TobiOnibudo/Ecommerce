@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 import all_product from "../Components/assets/all_product";
 
 
@@ -12,16 +12,47 @@ export type Product = {
     old_price: number,
   }
 
+  type AddToCartFunction = (itemId: number) => void;
+  type RemoveFromCartFunction = (itemId: number) => void;
 
-
-export const ShopContext = createContext<Array<Product>
->([]);
+  type CartItem = {count : number}
+  interface ContextValue {
+    all_product: Product[];
+    cartItems: CartItem[];
+    addToCart : AddToCartFunction;
+    removeFromCart : RemoveFromCartFunction;
+  }
+    
+  const defaultValue: ContextValue = {
+    all_product: [],
+    cartItems: [],
+    addToCart: () => {},
+    removeFromCart: () => {}
+};
+export const ShopContext = createContext<ContextValue>(defaultValue);
 
 export const useShop = () => useContext(ShopContext);
 
-const ShopContextProvider = (props : any) => {
-    const contextValue =  all_product
+const getDefaultCart = () =>{
+    const cart : any = {};
+    const productLength = all_product ? all_product.length : 0;
+    for (let index = 0; index < productLength+1; index++) {
+       cart[index] = 0;
+    }
+    return cart;
+}
 
+const ShopContextProvider = (props : any) => {
+    const [cartItems,setCartItems] = useState(getDefaultCart());    
+    const addToCart = (itemId : number) => {
+        setCartItems((prev : any)=>({...prev,[itemId]:prev[itemId]+1}))
+    } 
+
+    const removeFromCart = (itemId : number) => {
+        setCartItems((prev : any)=>({...prev,[itemId]:prev[itemId]-1}))
+    } 
+
+    const contextValue =  {all_product,cartItems,addToCart,removeFromCart};
     return (
         <ShopContext.Provider value={contextValue}>
             {props.children}
