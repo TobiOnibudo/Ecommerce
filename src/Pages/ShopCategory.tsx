@@ -15,16 +15,16 @@ function ShopCategory({banner,category, ...props} : Props){
   
   return (
     <div className="shop-category">
-      <img className="shopcategory-banner" src={banner} alt="banner display discounts and a model on the page "/>
-      <div className="shopcategory-indexSort">
+      <img className="shop-category-banner" src={banner} alt="banner display discounts and a model on the page "/>
+      <div className="shop-category-indexSort">
         <p>
           <span> Showing 1-12 </span> out of 36 products
         </p>
-        <div className="shopcategory-sort">
+        <div className="shop-category-sort">
           Sort by <img src={dropdown_icon} alt="icon for a drop down" />        
         </div>
       </div>
-      <div className="shopcategory-products">
+      <div className="shop-category-products">
         {all_product.map((item : Product ,index: number)=> 
         {
             if(category === item.category)
@@ -37,7 +37,7 @@ function ShopCategory({banner,category, ...props} : Props){
             }
         })}
       </div>
-      <div className="shopcategory-loadmore">
+      <div className="shop-category-loadmore">
         Explore more
       </div>
     </div>
