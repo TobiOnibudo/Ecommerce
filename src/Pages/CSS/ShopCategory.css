@@ -9,7 +9,6 @@
     margin: 0px 170px;
     justify-content: space-between;
     align-items: center;
-    width: 85%;
 }
 
 .shop-category-sort{
@@ -25,7 +24,7 @@
 .shop-category-products{
     margin: 20px 170px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     row-gap: 80px;
     justify-items: center;
     align-items: center;
