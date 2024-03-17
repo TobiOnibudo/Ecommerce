@@ -42,7 +42,7 @@ function CartItems(){
                 <div>
                     <div className="cartitems-total-item">
                         <p>Subtotal</p>
-                        <p>${0}</p>
+                        <p>${getTotalCartAmount()}</p>
                     </div>
                     <hr/>
                     <div className="cartitems-total-item">
