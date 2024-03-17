@@ -1,6 +1,7 @@
 import { useShop } from "../../Context/ShopContext";
 import "./CartItems.css";
 import remove_icon from "../assets/cart_cross_icon.png"
+
 function CartItems(){
     const {all_product, cartItems, removeFromCart,getTotalCartAmount} = useShop();
     return (
@@ -21,7 +22,7 @@ function CartItems(){
                 return  (
                 <div>
                 <div className="cartitems-format cartitems-format-main">
-                    <img src={product.image} alt=""  className="carticon-product"/>
+                    <img src={product.image} alt=""  className="carticon-product-icon"/>
                     <p>{product.name}</p>
                     <p>${product.new_price}</p>
                     <button className="cartitems-quantity">{cartItems[product.id]}</button>
@@ -38,7 +39,7 @@ function CartItems(){
 
         <div className="cartitems-down">
             <div className="cartitems-total">
-                <h1>cart Totals</h1>
+                <h1>Cart Totals</h1>
                 <div>
                     <div className="cartitems-total-item">
                         <p>Subtotal</p>
