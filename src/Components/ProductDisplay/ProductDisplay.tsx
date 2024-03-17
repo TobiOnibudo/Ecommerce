@@ -25,10 +25,10 @@ function ProductDisplay({ product }: ProductDisplayProps){
       <div className="productdisplay-right">
         <h1>{product?.name}</h1>
         <div className="productdisplay-right-stars">
-          <img src={star_icon} alt="" />
-          <img src={star_icon} alt="" />
-          <img src={star_icon} alt="" />
-          <img src={star_icon} alt="" />
+          <img src={star_icon} alt="star icon" />
+          <img src={star_icon} alt="star icon" />
+          <img src={star_icon} alt="star icon" />
+          <img src={star_icon} alt="star icon" />
           <img src={star_dull_icon} alt="" />
           <p>(122)</p>
         </div>
@@ -43,9 +43,9 @@ function ProductDisplay({ product }: ProductDisplayProps){
         <div className="productdisplay-right-description">
             A light weight apparel 
         </div>
-        <div className="productdispaly-right-size">
+        <div className="productdisplay-right-size">
           <h1>Select Size</h1>
-          <div className="productdisplay-right-size">
+          <div className="productdisplay-right-sizes">
             <div>S</div>
             <div>M</div>
             <div>L</div>
