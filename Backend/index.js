@@ -25,6 +25,17 @@ app.get('/', (req, res) => {
 })
 
 
+//Image Storage Engine
+const diskStorage = multer.diskStorage(
+    {
+        destination : './upload/images',
+        filename: (req,file,cb) =>{
+            return cb(null,`${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`)
+        }
+    }
+)
+
+const upload =multer({storage : diskStorage})
 
 
 app.listen(port,(error) =>
