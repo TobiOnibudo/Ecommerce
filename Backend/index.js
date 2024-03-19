@@ -1,3 +1,5 @@
+import {Product} from "Model/Product.mjs"
+
 require('dotenv').config();
 const express = require("express");
 const port = process.env.port || 4000;
@@ -43,6 +45,27 @@ app.post("/upload",upload.single('product'),(req,res) =>{
     res.json({
         success : 1,
         image_url: `http://localhost:${port}/images/${req.file.filename}`
+    })
+})
+
+// Schema for Creating Products
+app.post('/addProduct',async(req,res) =>{
+    const data = req.body
+    const product = new Product({
+        id: data.id,
+        name: data.name,
+        image: data.image,
+        category: data.category, 
+        new_price : data.new_price,
+        old_price : data.old_price,
+    })
+
+    console.log(product)
+    await product.save();
+    console.log("Saved");
+    res.json({
+        success: true,
+        name: req.body.name,
     })
 })
 
