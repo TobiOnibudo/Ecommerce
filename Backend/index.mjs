@@ -88,6 +88,13 @@ app.post('/deleteproduct', async (req,res)=>{
     })
 })
 
+//Creating API Endpoint for getting all products
+app.get('/allproducts', async(req,res)=> {
+    let products = await Product.find({})
+        console.log("All Proucts Fetched");
+        res.send(products);
+})
+
 app.listen(port,(error) =>
 {
     !error ? console.log(`Server Running on Port ${port}`) : 
