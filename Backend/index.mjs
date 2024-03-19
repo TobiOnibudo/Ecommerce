@@ -1,18 +1,16 @@
-import {Product} from "Model/Product.mjs"
-
-require('dotenv').config();
-const express = require("express");
+import express from "express";
+import dotenv from "dotenv";
+import mongoose from "mongoose";
+import jwt from "jsonwebtoken";
+import multer from "multer";
+import cors from "cors";
+import Product from "./Model/Product.js"; 
 const port = process.env.port || 4000;
-const app = express();
-const mongoose = require("mongoose");
-const jwt = require("jsonwebtoken")
-const multer = require("multer")
-const path = require("path")
-const cors = require("cors")
 
+dotenv.config();
 const userName = process.env.DB_USER
 const dbPassword = process.env.DB_PASSWORD
-
+const app = express();
 app.use(express.json());
 app.use(cors());
 
