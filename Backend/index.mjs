@@ -48,9 +48,19 @@ app.post("/upload",upload.single('product'),(req,res) =>{
 
 // Schema for Creating Products
 app.post('/addProduct',async(req,res) =>{
+    let products = await Product.find({});
+    let id;
+    if (products.length > 0)
+    {
+        let last_product = products.slice(-1)[0];
+        id = last_product.id+1;
+    }
+    else{
+        id = 1
+    }
     const data = req.body
     const product = new Product({
-        id: data.id,
+        id: id,
         name: data.name,
         image: data.image,
         category: data.category, 
