@@ -95,6 +95,30 @@ app.get('/allproducts', async(req,res)=> {
         res.send(products);
 })
 
+// Creating API Endpoint for updating a product
+app.put('/product/:id', async(req,res) => {
+    const productId = req.params.id;
+    const updateData = req.body;
+    console.log(productId)
+      try {
+        const updatedProduct = await Product.findOneAndUpdate({ id: productId }, updateData, { new: true });
+        console.log("Found and Updated");
+        console.log(updatedProduct)
+        if (!updatedProduct) {
+            return res.status(404).json({ error: 'Product not found' });
+        }
+        
+        // Save the updated product to the database
+        await updatedProduct.save();
+        
+        res.json(updatedProduct);
+    } catch (error) {
+        console.error('Error updating product:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+
 app.listen(port,(error) =>
 {
     !error ? console.log(`Server Running on Port ${port}`) : 
