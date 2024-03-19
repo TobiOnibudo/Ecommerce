@@ -1,16 +1,16 @@
-require('dotenv').config();
-const express = require("express");
+import express from "express";
+import dotenv from "dotenv";
+import mongoose from "mongoose";
+import jwt from "jsonwebtoken";
+import multer from "multer";
+import cors from "cors";
+import Product from "./Model/Product.js"; 
 const port = process.env.port || 4000;
-const app = express();
-const mongoose = require("mongoose");
-const jwt = require("jsonwebtoken")
-const multer = require("multer")
-const path = require("path")
-const cors = require("cors")
 
+dotenv.config();
 const userName = process.env.DB_USER
 const dbPassword = process.env.DB_PASSWORD
-
+const app = express();
 app.use(express.json());
 app.use(cors());
 
@@ -43,6 +43,27 @@ app.post("/upload",upload.single('product'),(req,res) =>{
     res.json({
         success : 1,
         image_url: `http://localhost:${port}/images/${req.file.filename}`
+    })
+})
+
+// Schema for Creating Products
+app.post('/addProduct',async(req,res) =>{
+    const data = req.body
+    const product = new Product({
+        id: data.id,
+        name: data.name,
+        image: data.image,
+        category: data.category, 
+        new_price : data.new_price,
+        old_price : data.old_price,
+    })
+
+    console.log(product)
+    await product.save();
+    console.log("Saved");
+    res.json({
+        success: true,
+        name: req.body.name,
     })
 })
 
