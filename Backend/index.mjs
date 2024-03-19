@@ -77,6 +77,17 @@ app.post('/addProduct',async(req,res) =>{
     })
 })
 
+// Creating API Endpoint for deleting Products
+app.post('/deleteproduct', async (req,res)=>{
+    await Product.findOneAndDelete({id: req.body.id})
+    console.log("Deleted");
+
+    res.json({
+        success: true,
+        name: req.body.name,
+    })
+})
+
 app.listen(port,(error) =>
 {
     !error ? console.log(`Server Running on Port ${port}`) : 
