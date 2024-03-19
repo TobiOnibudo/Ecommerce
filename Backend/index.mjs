@@ -48,9 +48,19 @@ app.post("/upload",upload.single('product'),(req,res) =>{
 
 // Schema for Creating Products
 app.post('/addProduct',async(req,res) =>{
+    let products = await Product.find({});
+    let id;
+    if (products.length > 0)
+    {
+        let last_product = products.slice(-1)[0];
+        id = last_product.id+1;
+    }
+    else{
+        id = 1
+    }
     const data = req.body
     const product = new Product({
-        id: data.id,
+        id: id,
         name: data.name,
         image: data.image,
         category: data.category, 
@@ -66,6 +76,48 @@ app.post('/addProduct',async(req,res) =>{
         name: req.body.name,
     })
 })
+
+// Creating API Endpoint for deleting Products
+app.post('/deleteproduct', async (req,res)=>{
+    await Product.findOneAndDelete({id: req.body.id})
+    console.log("Deleted");
+
+    res.json({
+        success: true,
+        name: req.body.name,
+    })
+})
+
+//Creating API Endpoint for getting all products
+app.get('/allproducts', async(req,res)=> {
+    let products = await Product.find({})
+        console.log("All Proucts Fetched");
+        res.send(products);
+})
+
+// Creating API Endpoint for updating a product
+app.put('/product/:id', async(req,res) => {
+    const productId = req.params.id;
+    const updateData = req.body;
+    console.log(productId)
+      try {
+        const updatedProduct = await Product.findOneAndUpdate({ id: productId }, updateData, { new: true });
+        console.log("Found and Updated");
+        console.log(updatedProduct)
+        if (!updatedProduct) {
+            return res.status(404).json({ error: 'Product not found' });
+        }
+        
+        // Save the updated product to the database
+        await updatedProduct.save();
+        
+        res.json(updatedProduct);
+    } catch (error) {
+        console.error('Error updating product:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 
 app.listen(port,(error) =>
 {
