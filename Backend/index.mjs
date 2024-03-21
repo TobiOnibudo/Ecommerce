@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
+import path from 'path';
 import multer from "multer";
 import cors from "cors";
 import Product from "./Model/Product.js"; 
