@@ -41,14 +41,17 @@ function ListProduct(){
             <hr />
             {allproducts.map((product : Product ,index) =>{
                 return (
-                    <div key={index} className="listproduct-format-main listproduct-format">
-                        <img src={product.image} alt="" className="listproduct-product-icon" />  
-                        <p>{product.name}</p>
-                        <p>${product.old_price}</p>
-                        <p>${product.new_price}</p>
-                        <p>{product.category}</p>
-                        <img className="listproduct-remove-icon" src={cross_icon} alt="" />
-                    </div>
+                    <>
+                        <div key={index} className="listproduct-format-main listproduct-format">
+                            <img src={product.image} alt="" className="listproduct-product-icon" />  
+                            <p>{product.name}</p>
+                            <p>${product.old_price}</p>
+                            <p>${product.new_price}</p>
+                            <p>{product.category}</p>
+                            <img className="listproduct-remove-icon" src={cross_icon} alt="" />
+                        </div>
+                        <hr/>
+                    </>
                 )
             })}
         </div>
