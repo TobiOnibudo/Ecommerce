@@ -100,9 +100,10 @@ function AddProduct(){
     const addAllProducts = async ()=>{
         console.log(typeof(all_products))
         let products : Product[] = all_products;
+
         for (let i = 0; i < products.length ; i++){
-            addProducts(products[i])
-            console.log(i)
+            // addProducts(products[i])
+            console.log(products[i])
         }
     }
 
