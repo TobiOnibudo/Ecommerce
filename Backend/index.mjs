@@ -30,8 +30,10 @@ app.get('/', (req, res) => {
 const diskStorage = multer.diskStorage(
     {
         destination : './upload/images',
-        filename: (req,file,cb) =>{
-            return cb(null,`${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`)
+        filename: (req,file,cb) =>{ 
+            const filename = `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`;
+            req.uploadedFileName = filename; // Store filename without the parameter in request object
+            return cb(null, filename)
         }
     }
 )
@@ -60,6 +62,7 @@ app.post('/addProduct',async(req,res) =>{
         id = 1
     }
     const data = req.body
+    console.log(data.image)
     const product = new Product({
         id: id,
         name: data.name,
@@ -118,6 +121,8 @@ app.put('/product/:id', async(req,res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
+// Creating
 
 
 app.listen(port,(error) =>
