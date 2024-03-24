@@ -5,12 +5,15 @@ import jwt from "jsonwebtoken";
 import path from 'path';
 import multer from "multer";
 import cors from "cors";
-import Product from "./Model/Product.js"; 
+import {Product,User} from "./Model/Product.js"; 
+
 const port = process.env.port || 4000;
 
 dotenv.config();
 const userName = process.env.DB_USER
 const dbPassword = process.env.DB_PASSWORD
+const maxCartItems = process.env.MAXIMUM_CART_ITEMS
+const salt = process.env.SALT
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -122,7 +125,79 @@ app.put('/product/:id', async(req,res) => {
     }
 });
 
-// Creating
+// Creating Endpoint for registering the user
+app.post('/signup',async(req,res) => {
+    let check = await User.findOne({email: req.body.email})
+
+    if(check){
+        return res.status(400).json({
+            success: false,
+            error: "This email is associated with an existing User."
+        })
+    }
+    let cart = {}
+    for (let i = 0; i < maxCartItems; i++) {
+       cart[i] = 0 
+    }
+
+    const user = new User({
+        name : req.body.username,
+        email: req.body.email,
+        password: req.body.password,
+        cartData : cart,
+    })
+
+    await user.save();
+
+    const data = {
+        user : {
+            id : user.id,
+        }
+    }
+    const token = jwt.sign(data,salt)
+
+    res.json({success: true,token})
+})
+
+// Creating endpoint for user login
+app.post('/login', async(req,res)=>{
+    let user = await User.findOne({email: req.body.email})
+    if (user)
+    {
+        const passCompare = req.body.password == user.password
+        const nameCompare = user.name.toLowerCase() == req.body.username.toLowerCase()
+        if (passCompare && nameCompare){
+            const data = {
+                user: {
+                    id : user.id,
+                }
+            }
+        const token = jwt.sign(data,salt)
+        res.json({success:true,token})
+        }
+        else if (!passCompare && !nameCompare)
+        {
+            res.json({
+                success: false,
+                error:"Wrong Password ",
+            })
+        }
+        else if (user.name != req.body.username)
+        {
+            res.json({
+                success: false,
+                error:"Wrong UserName",
+            })
+        }
+    }
+    else
+    {
+        res.json({
+            success: false,
+            error:"Wrong Email Id",
+        })
+    }
+})
 
 
 app.listen(port,(error) =>
