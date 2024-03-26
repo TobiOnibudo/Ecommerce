@@ -165,8 +165,8 @@ app.post('/login', async(req,res)=>{
     if (user)
     {
         const passCompare = req.body.password == user.password
-        const nameCompare = user.name.toLowerCase() == req.body.username.toLowerCase()
-        if (passCompare && nameCompare){
+       
+        if (passCompare ){
             const data = {
                 user: {
                     id : user.id,
@@ -175,18 +175,11 @@ app.post('/login', async(req,res)=>{
         const token = jwt.sign(data,salt)
         res.json({success:true,token})
         }
-        else if (!passCompare && !nameCompare)
+        else if (!passCompare )
         {
             res.json({
                 success: false,
                 error:"Wrong Password ",
-            })
-        }
-        else if (user.name != req.body.username)
-        {
-            res.json({
-                success: false,
-                error:"Wrong UserName",
             })
         }
     }
