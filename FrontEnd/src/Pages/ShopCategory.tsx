@@ -25,7 +25,7 @@ function ShopCategory({banner,category, ...props} : Props){
         </div>
       </div>
       <div className="shop-category-products">
-        {all_product.map((item : Product ,index: number)=> 
+        {all_product?.map((item : Product ,index: number)=> 
         {
             if(category === item.category)
             {
