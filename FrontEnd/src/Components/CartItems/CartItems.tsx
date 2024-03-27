@@ -15,12 +15,12 @@ function CartItems(){
             <p>Remove</p>
         </div>
         <hr/>
-        {all_product.map((product) =>
+        {all_product?.map((product,index) =>
         {
             if (cartItems[product.id] > 0)
             {
                 return  (
-                <div>
+                <div key={index}>
                 <div className="cartitems-format cartitems-format-main">
                     <img src={product.image} alt=""  className="carticon-product-icon"/>
                     <p>{product.name}</p>
