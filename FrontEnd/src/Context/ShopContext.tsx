@@ -61,11 +61,11 @@ const ShopContextProvider = (props : any) => {
     const addToCart = (itemId : number) => {
         setCartItems((prev : any)=>({...prev,[itemId]:prev[itemId]+1}))
         if (localStorage.getItem('auth-token')){
-            setCart(itemId)
+            setCartItem(itemId)
         }
     } 
 
-    const setCart = async (itemId : number) => {
+    const setCartItem = async (itemId : number) => {
         const response = await fetch("http://localhost:4000/addtocart",{
                 method: 'POST',
                 headers : {
@@ -86,7 +86,30 @@ const ShopContextProvider = (props : any) => {
     }
     const removeFromCart = (itemId : number) => {
         setCartItems((prev : any)=>({...prev,[itemId]:prev[itemId]-1}))
+        if (localStorage.getItem('auth-token')){
+            removeCartItem(itemId)
+        }
     } 
+
+    const removeCartItem = async (itemId : number) => {
+        const response = await fetch("http://localhost:4000/removefromcart",{
+                method: 'POST',
+                headers : {
+                    Accept : 'application/form-data',
+                    'auth-token': `${localStorage.getItem('auth-token')}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({"itemId": itemId}),
+            })
+            const responseData = await response.json()
+            if (all_product){
+            const shortName = all_product[responseData].name.split(' ').slice(0, 3).join(' ')
+            alert(`Removed ${shortName}... from cart`)
+            }
+            else {
+                alert(`Something seems to have gone wrong while attempt to add in cart`)
+            }
+    }
 
     const getTotalCartAmount = () => {
         let totalAmount = 0;
