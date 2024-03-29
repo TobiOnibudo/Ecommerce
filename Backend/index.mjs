@@ -228,9 +228,16 @@ app.get('/popular/women',async (req,res)=>{
 
 // creating endpoint for adding products in cartdata
 app.post('/addtocart',fetchUser,async (req,res) =>{
-    console.log(req.body,req.user)
     let userData = await User.findOne({_id: req.user.id})
     userData.cartData[req.body.itemId] += 1
+    await User.findOneAndUpdate({_id : userData._id},{cartData: userData.cartData})
+   res.send(`${req.body.itemId}`)
+})
+
+// creating endpoint to remove product from cartdata
+app.post('/removefromcart',fetchUser,async(req,res) => {
+    let userData = await User.findOne({_id: req.user.id})
+    userData.cartData[req.body.itemId] -= 1
     await User.findOneAndUpdate({_id : userData._id},{cartData: userData.cartData})
    res.send(`${req.body.itemId}`)
 })
